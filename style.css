@@ -66,7 +66,7 @@ a {
 }
 
 nav {
-  border-color: black;
+  border-color: #040303;
   border-radius: 10px 100px / 120px;
   border-style: groove;
   border-width: 7px;
@@ -173,7 +173,40 @@ button:hover {
 }
 
 .navbar {
-  background-color: white;
+  background-color: #eed59e;
+}
+
+.navbar-brand {
+  color: #ffff; /* Text color */
+  font-weight: bold; /* Bold font */
+  transition: color 0.3s; /* Smooth transition */
+}
+
+
+.btn-primary, .btn-info {
+  margin-left: 10px; /* Adjust spacing between buttons */
+}
+
+.btn-primary:hover, .btn-info:hover {
+  background-color: #c0660b; /* Background color on hover */
+  border-color: #c0660b; /* Border color on hover */
+}
+
+#volume-slider {
+  margin-right: 10px; /* Adjust spacing */
+}
+
+.dark-mode .navbar {
+  background-color: #333333; /* Dark mode background color */
+}
+
+.dark-mode .navbar-brand {
+  color: #ffffff; /* Dark mode text color */
+}
+
+.dark-mode .btn-primary, .dark-mode .btn-info {
+  background-color: #010509; /* Dark mode button background color */
+  border-color: #ffffff; /* Dark mode button border color */
 }
 
 .navbar > a {
@@ -460,5 +493,5 @@ thead{
 }
 
 .btn-sound:hover {
-  background-color: rgb(94, 143, 206);
+  background-color: DodgerBlue;
 }
