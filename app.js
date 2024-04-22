@@ -80,6 +80,7 @@ const game_loop = () => {
     checkBoardComplete();
     checkWinner();
 }
+
 //FUNCTION TO DISPLAY WHOSE MOVE IT IS (Player/Computer/Player 1/2)
 const showPlayer = (mode,player) => {
   if (mode == 1){ // mode 1 is single Player
@@ -221,7 +222,7 @@ const minimax = (board, isMaximizing) => {
 
  var endMusic = null; //the Audio object for the music at the end of the game
 
-const checkWinner = () => {
+ const checkWinner = () => {
     let res = check_match();
     var playerstat1 = 0;
     var computerstat1 = 0;
@@ -234,8 +235,8 @@ const checkWinner = () => {
     const audio = document.querySelector("audio");
 
     if (res == "O") {
-      if (gameMode == 1)  winner_statement.innerText = "Player Won"; // Single player mode
-      else winner_statement.innerText = "Player 1 Won"; // 2 player mode
+        if (gameMode == 1)  winner_statement.innerText = "Player Won"; // Single player mode
+        else winner_statement.innerText = "Player 1 Won"; // 2 player mode
         winner_statement.classList.add("playerWin");
         board_full = true;
         playerstat1++;
@@ -246,7 +247,6 @@ const checkWinner = () => {
         audio.pause();
         endMusic = new Audio("audio/win.wav");
         endMusic.play();
-
     }
     else if (res == "X") {
         if (gameMode == 1)  winner_statement.innerText = "Computer Won"; //Single player mode
@@ -282,7 +282,8 @@ const checkWinner = () => {
     document.getElementById("draw1").innerText =  temp5;
     document.getElementById("draw2").innerText = temp6;
 
-    if (loss1 == 1 || loss2 == 1 || draw1 == 1 || draw2 == 1) { //when the game ends, I create and add a button in the 'div-end-of-game' div
+    // Check if the sound button already exists before adding it
+    if ((loss1 === 1 || loss2 === 1 || draw1 === 1 || draw2 === 1) && document.getElementsByClassName("btn-sound").length === 0) {
         var btn = document.createElement("button");
         btn.className = "btn-sound";
         btn.innerHTML = "<i class='fa fa-volume-up' aria-hidden='true'></i>";
@@ -290,7 +291,6 @@ const checkWinner = () => {
         document.getElementsByClassName("div-end-of-game")[0].appendChild(btn);
     }
 };
-
 var x = document.getElementById("myAudio");
 
 const muteAudio = () => { //mutes or demutes all the audio (music and end game music)
