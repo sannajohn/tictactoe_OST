@@ -1,3 +1,7 @@
+const WIN_SCORE = 10; // Arbitrary score for a winning state
+const DRAW_SCORE = 0; // Score for a draw state
+const LOSS_SCORE = -10; // Score for a losing state
+
 let play_board = ["", "", "", "", "", "", "", "", ""];
 let player = "O";
 let computer = "X";
@@ -5,6 +9,7 @@ let gameMode = 1; // 1 is for single Player; 2 is for 2 Players
 let board_full = false;
 let ai_level;
 let lastMove = null; // Variable to store the last move
+
 
 const render_board = () => {
     const board_container = document.querySelector(".play-area");
@@ -140,79 +145,67 @@ const undoLastMove = () => {
     }
 };
 
-const addComputerMove = (ai_level) => {
-    if(!board_full){
-        let score;
-        let compare;
-        switch (ai_level) {
-            case "hard":
-                score = -Infinity;
-                compare = (a,b) => a > b;
-                break;
-            case "easy":
-                score = Infinity;
-                compare = (a,b) => a < b;
-                break;
-            case "normal":
-                let guess = Math.random() * 100;
-                if (guess <= 40) {
-                    score = Infinity;
-                    compare = (a,b) => a < b;
-                }
-                else {
-                    score = -Infinity;
-                    compare = (a,b) => a > b;
-                }
-                break;
-        }
-        let nextMove;
-        for(let i = 0; i < play_board.length; i++){
-            if(play_board[i] == ""){
+const addComputerMove = () => {
+    if (!board_full) {
+        let bestMove;
+        let bestScore = -Infinity;
+        for (let i = 0; i < play_board.length; i++) {
+            if (play_board[i] === "") {
                 play_board[i] = computer;
-                let endScore = minimax(play_board,0, false);
+                let score = minimax(play_board, false);
                 play_board[i] = "";
-                if (compare(endScore, score)) {
-                    score = endScore;
-                    nextMove = i;
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = i;
                 }
             }
         }
-        play_board[nextMove] = computer;
+        play_board[bestMove] = computer;
         game_loop();
     }
 }
 
+
 let scores = {X : 1, O : -1, tie : 0};
 
-const minimax = (board, isMaximizing) => {
+// Modified minimax function to consider Tic Tac Toe game states
+const minimax = (board, maximizingPlayer) => {
     let res = check_match();
-    if(res != ""){
-        return scores[res];
+    if (res === player) {
+        return LOSS_SCORE;
+    } else if (res === computer) {
+        return WIN_SCORE;
+    } else if (res === "tie") {
+        return DRAW_SCORE;
     }
-    if(isMaximizing){
+
+    if (maximizingPlayer) {
         let bestScore = -Infinity;
-        for(let i = 0;i<board.length;i++){
-            if(board[i] == ""){
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === "") {
                 board[i] = computer;
                 let score = minimax(board, false);
                 board[i] = "";
-                bestScore = Math.max(score,bestScore);
+                bestScore = Math.max(score, bestScore);
             }
         }
         return bestScore;
     } else {
         let bestScore = Infinity;
-        for(let i = 0;i<board.length;i++){
-            if(board[i] == ""){
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === "") {
                 board[i] = player;
                 let score = minimax(board, true);
                 board[i] = "";
-                bestScore = Math.min(score,bestScore);
+                bestScore = Math.min(score, bestScore);
             }
         }
         return bestScore;
     }
 }
+
+
+
  var temp1 = 0;
  var temp2 = 0;
  var temp3 = 0;
