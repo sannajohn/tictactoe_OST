@@ -92,16 +92,33 @@
 
 
       <!-- <button onclick="myFunction()">Toggle dark mode</button> -->
-
     <script>
         function myFunction() {
-        var element = document.body;
-        element.classList.toggle("dark-mode");
+          function myFunction() {
+            var body = document.body;
+            body.classList.toggle("dark-mode");
+        
+            var hero = document.getElementById('hero');
+            var container = document.getElementById('play');
+            var darkToggle = document.getElementsByClassName('btn')[1];
+        
+            if (body.classList.contains("dark-mode")) {
+              localStorage.setItem('selectedTheme', 'dark-mode');
+              darkToggle.textContent = "Light Mode";
+            } else {
+              localStorage.setItem('selectedTheme', '');
+              darkToggle.textContent = "Dark Mode";
+            }
+        
+            hero.classList.toggle("dark-hero");
+            container.classList.toggle("dark-play");
+        
+            // Log the selected theme
+            console.log("Selected Theme:", localStorage.getItem('selectedTheme'));
+          }
         }
     </script>
       
-    
-
     <script src="https://connect.facebook.net/en_US/fbinstant.6.3.js"></script>
     <script src="app.js"></script>
 

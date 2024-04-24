@@ -150,45 +150,46 @@
     <div id="block_8" class="block"></div>
   </div>
   <!-- <button onclick="myFunction()">Toggle dark mode</button> -->
-
   <script>
     function myFunction() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+  
       var main = document.body;
       var hero = document.getElementsByClassName('navbar')[0]
       var container = document.getElementById('play')
       var darkToggle = document.getElementsByClassName('btn')
       var heroText = document.getElementsByClassName('navbar-brand')
       var arr = Array.prototype.slice.call(heroText)
-
+  
       arr.forEach(element => {
-        element.classList.toggle('dark-text')
+          element.classList.toggle('dark-text')
       });
-
-      if (darkToggle[1].textContent === "Dark Mode"){
-        darkToggle[1].textContent = "Light Mode"
+  
+      if (element.classList.contains("dark-mode")) {
+          darkToggle[1].textContent = "Light Mode";
       } else {
-        darkToggle[1].textContent = "Dark Mode"
+          darkToggle[1].textContent = "Dark Mode";
       }
-
+  
       hero.classList.toggle("dark-hero");
       main.classList.toggle("dark-main");
-      container.classList.toggle("dark-play")
-    }
+      container.classList.toggle("dark-play");
+  }
   </script>
-  <select id="ai_level">
-    <option value="easy" selected>Easy</option>
-    <option value="normal">Normal</option>
-    <option value="hard">Hard</option>
-  </select>
-  <div class="div-end-of-game">
-    <!-- <button onclick="reset_board()">RESET BOARD</button> -->
-    <button onclick="undoLastMove()">Undo Move</button>
-    <button id="selectXButton" onclick="selectFirstPlayer('X')">Play O first</button>
-    <button id="selectOButton" onclick="selectFirstPlayer('O')">Play X first</button>
-
-  </div>
+    <select id="ai_level">
+      <option value="easy" selected>Easy</option>
+      <option value="normal">Normal</option>
+      <option value="hard">Hard</option>
+    </select>
+    <div class="div-end-of-game">
+      <!-- <button onclick="reset_board()">RESET BOARD</button> -->
+      <button onclick="undoLastMove()">Undo Move</button>
+      <button id="selectXButton" onclick="selectFirstPlayer('X')">Play O first</button>
+      <button id="selectOButton" onclick="selectFirstPlayer('O')">Play X first</button>
+    </div>
   <h2 id="winner"></h2>
-</div>
+  </div>
 
 <script src="https://connect.facebook.net/en_US/fbinstant.6.3.js"></script>
 <script src="app.js"></script>
