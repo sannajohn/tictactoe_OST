@@ -1,6 +1,7 @@
 const WIN_SCORE = 10; // Arbitrary score for a winning state
 const DRAW_SCORE = 0; // Score for a draw state
 const LOSS_SCORE = -10; // Score for a losing state
+
 let play_board = ["", "", "", "", "", "", "", "", ""];
 let player = "O";
 let computer = "X";
@@ -8,6 +9,7 @@ let gameMode = 1; // 1 is for single Player; 2 is for 2 Players
 let board_full = false;
 let ai_level;
 let lastMove = null; // Variable to store the last move
+
 
 const render_board = () => {
     const board_container = document.querySelector(".play-area");
@@ -143,7 +145,6 @@ const undoLastMove = () => {
     }
 };
 
-// Modified function to add computer move using minimax algorithm
 const addComputerMove = () => {
     if (!board_full) {
         let bestMove;
@@ -163,6 +164,7 @@ const addComputerMove = () => {
         game_loop();
     }
 }
+
 
 let scores = {X : 1, O : -1, tie : 0};
 
@@ -201,6 +203,9 @@ const minimax = (board, maximizingPlayer) => {
         return bestScore;
     }
 }
+
+
+
  var temp1 = 0;
  var temp2 = 0;
  var temp3 = 0;
